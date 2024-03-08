@@ -100,6 +100,6 @@ jobs:
                   name: adp-dist
                   path: dist
             - run: echo "//<npm-registry>:8080/:_authToken=$NODE_AUTH_TOKEN" > ~/.npmrc
-            - run: npm publish --provenance
+            - run: npm publish --provenance --access public
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
