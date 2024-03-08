@@ -1,5 +1,5 @@
 import { it, expect, describe } from 'vitest';
-import { checkHolidays } from '../../src/utils.js';
+import { checkHolidays } from '../../src/utils.ts';
 
 describe('utils/checkHolidays', () => {
     it('returns false when no holidays are set', () => {

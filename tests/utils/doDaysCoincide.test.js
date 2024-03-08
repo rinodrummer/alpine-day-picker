@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { doDaysCoincide } from '../../src/utils.js';
+import { doDaysCoincide } from '../../src/utils.ts';
 
 describe('utils/doDaysCoincide', () => {
     test("different dates don't coincide", () => {
