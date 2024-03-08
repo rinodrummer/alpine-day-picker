@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Alpine.js Day Picker</title>
+        
+        <style>
+            a {
+                text-decoration: none;
+                color: black;
+            }
+            
+            .is-disabled {
+                color: red;
+            }
+            
+            .is-active {
+                color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <div x-data="DayPicker($refs.dayInput)">
+                <button type="button" @click="currentWeek--" :disabled="currentWeek <= minWeeks">
+                    Previous week
+                </button>
+                
+                <input type="number" x-model.number="currentWeek" aria-label="Current week" />
+                
+                <input
+                    type="date"
+                    x-model="value"
+                    x-ref="dayInput"
+                    :min="subWeeks(today, 3).toISOString().split('T')[0]"
+                    :max="addWeeks(today, 2).toISOString().split('T')[0]"
+                    aria-label="Date"
+                />
+                
+                <button type="button" @click="currentWeek++" :disabled="currentWeek >= maxWeeks">
+                    Next week
+                </button>
+                
+                <template x-for="day of daysOfTheWeek" :key="day.getTime()">
+                    <a
+                        href="#"
+                        role="button"
+                        @click.prevent="value = day"
+                        :class="{
+                            'is-active': isSameDay(valueAsDate, day),
+                            'is-disabled': !isDayAvailable(day)
+                        }"
+                        x-bind:aria-disabled="!isDayAvailable(day)"
+                    >
+                        <div>
+                            <span x-text="day.getDate()"></span>
+                            <span x-text="day.toLocaleString('en', { month: 'long' })"></span>
+                            <span x-text="day.getFullYear()"></span>
+                            <span x-text="day.toLocaleString('en', { weekday: 'long' })"></span>
+                        </div>
+                    </a>
+                </template>
+            </div>
+        </div>
+        
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>
