@@ -1,6 +1,6 @@
 {
     "name": "alpine-day-picker",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "Alpine.js Day Picker component",
     "homepage": "https://github.com/rinodrummer/alpine-day-picker",
     "license": "MIT",
