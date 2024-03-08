@@ -8,13 +8,13 @@ export type Holiday =
     | `${Month}-${number}`
     | { month: Month; day: number };
 
-export function toUTCDate(date: Date) {
+export function toUTCDate(date: Date): Date {
     return new Date(
         Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
     );
 }
 
-export function doDaysCoincide(d1: Date, d2: Date) {
+export function doDaysCoincide(d1: Date, d2: Date): boolean {
     d1 = toUTCDate(d1);
     d2 = toUTCDate(d2);
 
@@ -25,7 +25,7 @@ export function doDaysCoincide(d1: Date, d2: Date) {
     );
 }
 
-export function checkHolidays(date: Date, holidays: Holiday[] = []) {
+export function checkHolidays(date: Date, holidays: Holiday[] = []): boolean {
     for (let holiday of holidays) {
         if (holiday instanceof Date) {
             return doDaysCoincide(date, holiday);
@@ -65,18 +65,18 @@ export function checkHolidays(date: Date, holidays: Holiday[] = []) {
     return false;
 }
 
-export function weeksBetween(fromDate: Date, toDate: Date) {
+export function weeksBetween(fromDate: Date, toDate: Date): number {
     return Math.trunc(
         (fromDate.getTime() - toDate.getTime()) / (7 * 24 * 60 * 60 * 1000)
     );
 }
 
-export function addWeeks(date: Date, weeks: number) {
+export function addWeeks(date: Date, weeks: number): Date {
     date.setDate(date.getDate() + weeks * 7);
 
     return date;
 }
 
-export function subWeeks(date: Date, weeks: number) {
+export function subWeeks(date: Date, weeks: number): Date {
     return addWeeks(date, Math.abs(weeks) * -1);
 }
